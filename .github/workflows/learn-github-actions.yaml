@@ -15,5 +15,5 @@ jobs:
           echo test, and deploy your project.
       - run: |
           echo "import sys" > myscript.py
-          echo "print(sys.argv[1])" >> myscript.py
+          echo "print(sys.argv[1].split("_"))" >> myscript.py
       - run: python myscript.py ${{ secrets.SECRET_CHECK }}
