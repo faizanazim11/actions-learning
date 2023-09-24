@@ -1,19 +1,17 @@
-name: learn-github-actions
-run-name: ${{ github.actor}} is learning Github Actions
+name: Start EC2 Instance
+run-name: Starting EC2 Instance
 on:
   push:
     branches:
       - master
 jobs:
-  checks-job:
+  starts-instance:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: echo Hello, world!
-      - run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-      - run: |
-          echo "import sys" > myscript.py
-          echo "print(sys.argv[1].split('_'))" >> myscript.py
-      - run: python myscript.py ${{ secrets.SECRET_CHECK }}
+      - name: Start AWS EC2
+        run: |
+          aws ec2 start-instances --instance-ids ${{ secrets.AWS_EC2_INSTANCE_ID }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
