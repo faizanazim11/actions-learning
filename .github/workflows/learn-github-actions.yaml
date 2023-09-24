@@ -16,4 +16,4 @@ jobs:
       - run: |
           echo "import sys" > myscript.py
           echo "print(sys.argv[1])" >> myscript.py
-      - run: python myscript.py ${{ secrets.SECRET_CHECK }}
+      - run: python myscript.py "${{ secrets.SECRET_CHECK }}"
